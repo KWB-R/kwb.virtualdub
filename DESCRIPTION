@@ -1,0 +1,9 @@
+Package: kwb.virtualdub
+Maintainer: Hauke Sonnenberg <hauke.sonnenberg@kompetenz-wasser.de>
+Author: Hauke Sonnenberg
+Version: 0.0.99
+Depends: kwb.utils
+License: GPL
+Title: Interface to free video processing software VirtualDub (http://virtualdub.org/)
+Description: Interface to free video processing software VirtualDub (http://virtualdub.org/)
+
