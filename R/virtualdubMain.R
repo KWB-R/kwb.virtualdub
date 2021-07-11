@@ -1,6 +1,13 @@
 # writeVirtualDubConfiguration -------------------------------------------------
-writeVirtualDubConfiguration <- function # Write VirtualDub configuration
-### Write configuration file for VirtualDub
+#' Write configuration file for VirtualDub
+#'
+#' @param outfile outfile
+#' @param nFrames nFrames
+#'
+#' @return Write VirtualDub configuration
+#' @export
+#'
+writeVirtualDubConfiguration <- function
 (
   outfile, 
   nFrames
@@ -40,11 +47,21 @@ writeVirtualDubConfiguration <- function # Write VirtualDub configuration
 }
 
 # pngPictureFilesToAviMovieFile ------------------------------------------------
-pngPictureFilesToAviMovieFile <- function  # convert png files to avi movie
-### Convert png files to avi movie using VirtualDub
+#' Convert png files to avi movie using VirtualDub
+#'
+#' @param lastPngFile default: dir(tdir, "^wtaqResult", full.names=TRUE)[1]
+#' @param tdir default: tempSubdirectory("wtaqResult")
+#' @param aviFile default: file.path(tdir, "out.avi")
+#' @param virtualDub path to virtualDub executable (default: 
+#' system.file("extdata", "VirtualDub", "vdub.exe", package = "kwb.virtualdub"))
+#' @param show.avi default: FALSE
+#' @return convert png files to avi movie
+#' @export
+#' @importFrom kwb.utils tempSubdirectory
+pngPictureFilesToAviMovieFile <- function  
 ( 
   lastPngFile = dir(tdir, "^wtaqResult", full.names=TRUE)[1],
-  tdir = tempSubdirectory("wtaqResult"), 
+  tdir = kwb.utils::tempSubdirectory("wtaqResult"), 
   aviFile = file.path(tdir, "out.avi"),
   virtualDub = system.file("extdata", "VirtualDub", "vdub.exe", package = "kwb.virtualdub"),
   show.avi = FALSE
@@ -77,13 +94,19 @@ pngPictureFilesToAviMovieFile <- function  # convert png files to avi movie
 }
 
 # playAviMovieFile -------------------------------------------------------------
-playAviMovieFile <- function # Show AVI file in VLC media player
-### Show AVI file in VLC media player
+#' Show AVI file in VLC media player
+#'
+#' @param avi path to avi file
+#'
+#' @return shows avi file in VLC media player
+#' @export
+#' @importFrom utils readRegistry
+playAviMovieFile <- function 
 (
   avi
 )
 {
   # Show AVI with VLC media player
-  reg <- readRegistry("SOFTWARE\\Classes\\Applications\\vlc.exe\\shell\\Open\\Command")[[1]]
+  reg <- utils::readRegistry("SOFTWARE\\Classes\\Applications\\vlc.exe\\shell\\Open\\Command")[[1]]
   system(sprintf("%s \"%s\"", sub("\"%1\"", "", reg), avi), wait=FALSE) 
 }
